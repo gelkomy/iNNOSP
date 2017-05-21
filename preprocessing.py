@@ -31,6 +31,7 @@ def preprocessing(files_path):
 
     for file_ in all_files:
         #####This part is to get csv file headers #####
+        print "current file is ",file_
         f = open(file_, 'rb')
         reader = csv.reader(f)
         headers = reader.next()
