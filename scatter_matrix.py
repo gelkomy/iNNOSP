@@ -15,10 +15,10 @@ this file computes the scatter matrix for a given data and its labels y
 %  ****************************************************************************/ 
 '''
 
-import pandas as pd
+#import pandas as pd
 import numpy as np
-import scipy as sp
-from pandas.core.frame import DataFrame
+#import scipy as sp
+#from pandas.core.frame import DataFrame
 # from preprocessing import preprocessing
 # from feature_extraction import feature_extraction
 #
@@ -31,7 +31,7 @@ def scatter_matrix(data, y):
     size = data.shape[1] # calculating the data size
     #classes = data.loc[:,'class'].unique() #get vector of classes
     classes = np.unique(y)
-    no_classes = classes.shape[0] #how many classes do we have
+#    no_classes = classes.shape[0] #how many classes do we have
     s_b = np.matrix(np.zeros([size, size])) #initializing s_b
     s_w = np.matrix(np.zeros([size, size]))
     overall_mean = np.matrix(np.mean(data))

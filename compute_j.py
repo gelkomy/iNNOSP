@@ -25,7 +25,7 @@ from feature_extraction import feature_extraction
 #
 # data = features['C3-P3']
 # y = np.random.randint(0, 4, data.shape[0])
-def cmopute_j(data, y):
+def compute_j(data, y):
     scatter = scatter_matrix(data, y)
     try:
         a = np.linalg.det(scatter['s_w'] + scatter['s_b'])
