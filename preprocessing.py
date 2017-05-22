@@ -19,7 +19,7 @@
 import pandas as pd
 import glob
 import csv
-
+from feature_extraction import feature_extraction
 def preprocessing(files_path):
 
     #files_path = r".\data"  #for testing
@@ -61,9 +61,13 @@ def preprocessing(files_path):
         del df[col_names[0]]  #After making it as index, delete it from data
         
         df=df.drop(df.columns[pd.Series(df.columns).str.startswith('-')], axis=1)
-        df_list.append(df)   #Append to total dataFrames list
+        df_list.append(feature_extraction(df))   #Append to total dataFrames list
+    all_windows={}
+    for current_dict in df_list:  
+       for i in current_dict:
+           if i in all_windows:
+               all_windows[i]=pd.concat([all_windows[i],current_dict[i]],axis=0)
+           else:
+               all_windows[i]=current_dict[i]
         
-
-    frame = pd.concat(df_list)
-
-    return frame
+    return  all_windows

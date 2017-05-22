@@ -64,3 +64,4 @@ def calculate_R(input_data):
         R_total[electrode] = R
         
     return R_total
+
