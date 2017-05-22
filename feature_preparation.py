@@ -3,7 +3,7 @@ this file performs the data preparation phase which contains preprossing,
 kalman filter, and computing y.
 
 % /**************************************************************************** 
-%  * Job:             compute J                    * 
+%  * Job:             Data Preparation phase                    * 
 %  *                                                                          * 
 %  *Inputs: patien_number, is_kalman (True if we want to apply kalman filter
     and False otherwise
