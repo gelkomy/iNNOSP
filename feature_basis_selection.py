@@ -17,50 +17,40 @@
 %  * Version:         1                                                       * 
 %  ****************************************************************************/ 
 '''
-import pandas as pd
-import pickle
-from compute_j import compute_j
+
 import copy
-with open(r'E:\Faculty of Engineering\InnoTech\Python Release\data.pkl', 'rb') as input:
-    data=pickle.load(input)
-
-with open(r'E:\Faculty of Engineering\InnoTech\Python Release\r.pkl', 'rb') as input:
-    R=pickle.load(input)    
-y=pd.read_csv(r'E:\Faculty of Engineering\InnoTech\Python Release\y.csv')
-y=y.ix[0:3600,1]
-
-# for each electrode perform the feature basis selection
-all_electrodes={} # dictionary of dataframes with selected features that is returned
-for electrode in data:
-    
-    #dataframe of the current electrode
-    electrode_data=data[electrode]
-    #getting the r of the current electrode
-    r= R[electrode]
-    selected_features=[] #the subset of features
-    
-    
-    #to perform greedy search
-    for i in range(0,r):
-        max_j=-99999 # for the greedy seach of maximum j
-        max_j_column_name=None  # column name of the feature with the maximum j
+from compute_j import compute_j
+def feature_basis_selection(data,y, R):
+    # for each electrode perform the feature basis selection
+    all_electrodes={} # dictionary of dataframes with selected features that is returned
+    for electrode in data:
         
-        #selecting the next best feature f*
-        for f in range(0, electrode_data.shape[1]):
-            current_features= copy.copy(selected_features)
-            current_features.append(f)
-            current_subset=electrode_data[current_features]
+        #dataframe of the current electrode
+        electrode_data=data[electrode]
+        #getting the r of the current electrode
+        r= R[electrode]
+        selected_features=[] #the subset of features
+        
+        
+        #to perform greedy search
+        for i in range(0,r):
+            max_j=-99999 # for the greedy seach of maximum j
             
-            #compute j for the current subset
-            j=compute_j(current_subset,y)
-            
-            if j > max_j and j <>0:
-                max_j=j
-                max_j_column_name= f
-                selected_features.append(f)
-#                print(selected_features)
-    all_electrodes[electrode]=electrode_data[selected_features]
+            #selecting the next best feature f*
+            for f in range(0, electrode_data.shape[1]):
+                current_features= copy.copy(selected_features)
+                current_features.append(f)
+                current_subset=electrode_data[current_features]
                 
-#    print "the selected features for the electrode " , electrode, " is ", selected_features
-    
-    
+                #compute j for the current subset
+                j=compute_j(current_subset,y)
+                
+                if j > max_j and j <>0:
+                    max_j=j
+                    selected_features.append(f)
+    #                print(selected_features)
+        all_electrodes[electrode]=electrode_data[selected_features]
+                    
+    #    print "the selected features for the electrode " , electrode, " is ", selected_features
+        
+    return all_electrodes    
