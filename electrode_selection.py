@@ -1,9 +1,8 @@
 '''
-this file performs the data preparation phase which contains preprossing,
-kalman filter, and computing y.
+this file selects the most effective electrode/electrodes
 
 % /**************************************************************************** 
-%  * Job:             compute J                    * 
+%  * Job:             electrode selection                    * 
 %  *                                                                          * 
 %  *Inputs: patien_number, is_kalman (True if we want to apply kalman filter
     and False otherwise
