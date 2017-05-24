@@ -35,8 +35,9 @@ def feature_preparation(patient_no, is_kalman = True):
     if patient_no < 10:
         patient_no = str('0'+str(patient_no))
     path = r".\data\patient" + str(patient_no)
-    preprocessed_data = preprocessing(path)
-    features = feature_extraction(preprocessed_data)
+#    preprocessed_data = preprocessing(path)
+#    features = feature_extraction(preprocessed_data)
+    features=preprocessing(path)
     feature_kalman = {}
     if is_kalman:
         for electrode in features:
