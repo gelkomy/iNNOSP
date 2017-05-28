@@ -27,7 +27,7 @@ from PrepareWindowsVector import getWindows
 folder_dir=r'E:\Faculty of Engineering\InnoTech\Epilipsy\Data\Patient 14 csv - Copy'
 data=preprocessing(folder_dir)
 #data=feature_extraction(data)
-#R=calculate_R(data)
+R=calculate_R(data)
 
 #electrode_data= data['FP1-F7']
 #
