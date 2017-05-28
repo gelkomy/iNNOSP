@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 '''
 % This file extracts features from input dataframe of a specific patient
-% the output is a dataframe with the extracted features
+% the output is a dictionary of dataframes with the extracted features
 % 
 % /**************************************************************************** 
 %  * Job:             Feature Extraction                                      * 
