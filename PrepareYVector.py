@@ -39,7 +39,7 @@ def convertTimeToSeconds(input_time):
     s = int(timeParts[2])
     return (h*3600) + (m*60) +(s)
 
-def getY(summary_file):
+def getY(summary_file,start_file_no , end_file_no):
     #step1: read the summay file that contains all data about patient
     #text_file=r'C:\Users\Yousef Essam\Desktop\Task1-ReadY\Patient14\test.txt'
     text_file = summary_file
@@ -69,7 +69,7 @@ def getY(summary_file):
         if('File Name' in line):
             fname = line.split(':')[1];
             edf.fileName = fname;
-            #print fname
+            
         if('File Start Time' in line):
             fileStartTime = line.split(':')[1]+':'+line.split(':')[2]+":"+line.split(':')[3];
             edf.fileStartTime = fileStartTime.replace('\n','');
@@ -110,29 +110,31 @@ def getY(summary_file):
     prevTime = -1;
     file_duration=0;
     numberOfEdfItems = len(edfItemList);
-    
     for i in range(0,numberOfEdfItems):
         tempEdfItem = edfItemList[i];
-        sTime =  tempEdfItem.fileStartTime;
-        eTime =  tempEdfItem.fileEndTime;
-        sTime_seconds = convertTimeToSeconds(sTime);
-        if (i == 0):
-            # Got the start of TimeLine
-           subtract_value = sTime_seconds;
-         
-        #solve the problem of days differnce in the Timeline                                       
-        
-        if(prevTime > sTime_seconds):
-            days = days + 1
-        diff = sTime_seconds-subtract_value;
-        
-        if(diff <= 0 or flag == 1):
-            flag = 1;
-            diff = diff + (86400*(days-1)); # add 24 hours in seconds unit;                               
-        
-        prevTime = sTime_seconds;
-        file_duration = convertTimeToSeconds(eTime) - sTime_seconds;
-        endTimePrev = diff + file_duration;
+        x1 = int(str(tempEdfItem.fileName.split('_')[1]).split('.')[0]);
+      
+        if(x1 >= start_file_no and x1 <= end_file_no):
+            sTime =  tempEdfItem.fileStartTime;
+            eTime =  tempEdfItem.fileEndTime;
+            sTime_seconds = convertTimeToSeconds(sTime);
+            if (i == 0):
+                # Got the start of TimeLine
+               subtract_value = sTime_seconds;
+             
+            #solve the problem of days differnce in the Timeline                                       
+            
+            if(prevTime > sTime_seconds):
+                days = days + 1
+            diff = sTime_seconds-subtract_value;
+            
+            if(diff <= 0 or flag == 1):
+                flag = 1;
+                diff = diff + (86400*(days-1)); # add 24 hours in seconds unit;                               
+            
+            prevTime = sTime_seconds;
+            file_duration = convertTimeToSeconds(eTime) - sTime_seconds;
+            endTimePrev = diff + file_duration;
     
     
     SimulationData = np.zeros(endTimePrev+1)
@@ -145,66 +147,67 @@ def getY(summary_file):
     endTimePrev = 0;
     for i in range(0,numberOfEdfItems):
         tempEdfItem = edfItemList[i];
-        sTime =  tempEdfItem.fileStartTime;
-        eTime =  tempEdfItem.fileEndTime;
-        sTime_seconds = convertTimeToSeconds(sTime);
-        if (i == 0):
-            # Got the start of TimeLine
-           subtract_value = sTime_seconds;
-         
-        #solve the problem of days differnce in the Timeline                                       
-       
-        
-        if(prevTime > sTime_seconds):
-            days = days + 1
-        diff = sTime_seconds-subtract_value;
-        
-        if(diff <= 0 or flag == 1):
-            flag = 1;
-            diff = diff + (86400*(days-1)); # add 24 hours in seconds unit;
-        
-        prevTime = convertTimeToSeconds(sTime);
-        miniGap = diff - endTimePrev;
-        miniGapStart = endTimePrev+1;
-        miniGapEnd = diff+1;
-        if((diff - endTimePrev) > thresholdValue):
-           gapDuration = (diff - endTimePrev);
-           SimulationData[endTimePrev:endTimePrev+gapDuration-1]=gapClassValue;
-        
-        file_duration = convertTimeToSeconds(eTime) - sTime_seconds;
-        endTimePrev = diff + file_duration;
-        
-        seizure_period = -1;
-        
-        if(len(tempEdfItem.seizuresList) > 0):
-            for t in range(0,len(tempEdfItem.seizuresList)):
-                seizure_period = -1;
-                seizure_period = tempEdfItem.seizuresList[t].startTime;
-                seizure_period = seizure_period + diff;
-                
-                sPointc1Start = seizure_period-3600;
-                sPointc1End = seizure_period;
-                sPointc2Start = seizure_period;
-                sPointc2End = seizure_period+180;
-                sPointc3Start = seizure_period+180;
-                sPointc3End = seizure_period+1980;
-                
-                if(sPointc1Start<=0):
-                    sPointc1Start = 1;
+        x1 = int(str(tempEdfItem.fileName.split('_')[1]).split('.')[0]);
+        if(x1 >= start_file_no and x1 <= end_file_no):
+            sTime =  tempEdfItem.fileStartTime;
+            eTime =  tempEdfItem.fileEndTime;
+            sTime_seconds = convertTimeToSeconds(sTime);
+            if (i == 0):
+                # Got the start of TimeLine
+               subtract_value = sTime_seconds;
+             
+            #solve the problem of days differnce in the Timeline                                       
+           
+            
+            if(prevTime > sTime_seconds):
+                days = days + 1
+            diff = sTime_seconds-subtract_value;
+            
+            if(diff <= 0 or flag == 1):
+                flag = 1;
+                diff = diff + (86400*(days-1)); # add 24 hours in seconds unit;
+            
+            prevTime = convertTimeToSeconds(sTime);
+            miniGapStart = endTimePrev+1;
+            miniGapEnd = diff+1;
+            if((diff - endTimePrev) > thresholdValue):
+               gapDuration = (diff - endTimePrev);
+               SimulationData[endTimePrev:endTimePrev+gapDuration-1]=gapClassValue;
+            
+            file_duration = convertTimeToSeconds(eTime) - sTime_seconds;
+            endTimePrev = diff + file_duration;
+            
+            seizure_period = -1;
+            
+            if(len(tempEdfItem.seizuresList) > 0):
+                for t in range(0,len(tempEdfItem.seizuresList)):
+                    seizure_period = -1;
+                    seizure_period = tempEdfItem.seizuresList[t].startTime;
+                    seizure_period = seizure_period + diff;
                     
-                SimulationData[sPointc1Start:sPointc1End]=1;
-                SimulationData[sPointc2Start:sPointc2End]=2;
-                SimulationData[sPointc3Start:sPointc3End]=3;
+                    sPointc1Start = seizure_period-3600;
+                    sPointc1End = seizure_period;
+                    sPointc2Start = seizure_period;
+                    sPointc2End = seizure_period+180;
+                    sPointc3Start = seizure_period+180;
+                    sPointc3End = seizure_period+1980;
+                    
+                    if(sPointc1Start<=0):
+                        sPointc1Start = 1;
+                        
+                    SimulationData[sPointc1Start:sPointc1End]=1;
+                    SimulationData[sPointc2Start:sPointc2End]=2;
+                    SimulationData[sPointc3Start:sPointc3End]=3;
+                    
+                    if(prevc2Start > 0):
+                        SimulationData[prevc2Start:prevc2End]=2;
+                    
+                    prevc2Start = sPointc2Start;
+                    prevc2End = sPointc2End;                          
                 
-                if(prevc2Start > 0):
-                    SimulationData[prevc2Start:prevc2End]=2;
                 
-                prevc2Start = sPointc2Start;
-                prevc2End = sPointc2End;                          
-            
-            
-        if (i != 0):
-            SimulationData[miniGapStart:miniGapEnd-1]=gapClassValue;
+            if (i != 0):
+                SimulationData[miniGapStart:miniGapEnd-1]=gapClassValue;
     return SimulationData
           
                       

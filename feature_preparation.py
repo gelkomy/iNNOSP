@@ -35,8 +35,9 @@ def feature_preparation(patient_no, is_kalman = True):
     if patient_no < 10:
         patient_no = str('0'+str(patient_no))
     path = r".\data\patient" + str(patient_no)
-    preprocessed_data = preprocessing(path)
-    features = feature_extraction(preprocessed_data)
+#    preprocessed_data = preprocessing(path)
+#    features = feature_extraction(preprocessed_data)
+    features=preprocessing(path)
     feature_kalman = {}
     if is_kalman:
         for electrode in features:
@@ -44,7 +45,7 @@ def feature_preparation(patient_no, is_kalman = True):
     else:
         feature_kalman = features
     summary_file = path + '\chb' + str(patient_no) + '-summary.txt'
-    y_ms = getY(summary_file)
+    y_ms = getY (summary_file,1,6)
     y_windowed = getWindows(y_ms)
     y_windowed = pd.DataFrame(y_windowed, columns=['y'])
     y_windowed = y_windowed.iloc[0:feature_kalman[list(feature_kalman.keys())[0]].shape[0]]
@@ -52,3 +53,8 @@ def feature_preparation(patient_no, is_kalman = True):
     #     pd.concat([feature_kalman[electrode], y_windowed], axis=1)
     prepared_data = {'y': y_windowed, 'features': feature_kalman}
     return prepared_data
+
+d = feature_preparation(14,False)
+
+#y = getY('D:\College\Inno\Python code\iNNOSP\data\Patient14\chb14-summary.txt',20,21)
+#print len(y)
