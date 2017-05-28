@@ -16,6 +16,9 @@ The function may perform imbalancing processing to enhance the accuracy.
 '''
 ############################### required packages ###############################
 pip install -U imbalanced-learn
+
+install the xgboost as shown in the following link
+https://www.ibm.com/developerworks/community/blogs/jfp/entry/Installing_XGBoost_For_Anaconda_on_Windows?lang=en
 '''
 
 import warnings
@@ -25,7 +28,7 @@ warnings.filterwarnings('ignore')
 import pandas as pd
 from sklearn.cross_validation import train_test_split
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier, ExtraTreesClassifier
-#from xgboost import XGBClassifier
+from xgboost import XGBClassifier
 from sklearn.svm import SVC, LinearSVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, roc_auc_score, roc_curve
@@ -61,7 +64,8 @@ def binary_classification(X,y):
                                                       RandomForestClassifier(n_estimators=100, n_jobs=-1, criterion='entropy'),
                         ExtraTreesClassifier(n_estimators=100, n_jobs=-1, criterion='gini'),
                         ExtraTreesClassifier(n_estimators=100, n_jobs=-1, criterion='entropy'),
-                                            SVC(kernel='rbf', C=1, gamma=1, probability=True) ,
+                        XGBClassifier(),
+#                                            SVC(kernel='rbf', C=1, gamma=1, probability=True) ,
                                                        KNeighborsClassifier(),
                                                                             GaussianProcessClassifier(1.0 * RBF(1.0), warm_start=True,n_jobs=-1),
                                                                                                      QuadraticDiscriminantAnalysis(),
