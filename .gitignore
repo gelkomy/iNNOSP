@@ -4,3 +4,5 @@
 *.csv
 *.asv
 *.pyc
+*.xml
+.idea/iNNOSP.iml
