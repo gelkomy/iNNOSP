@@ -36,7 +36,8 @@ def scatter_matrix(data, y):
     s_w = np.matrix(np.zeros([size, size]))
     overall_mean = np.matrix(np.mean(data))
     for cls in classes:
-        xi = np.matrix(data[y == cls])  # get data foreach calss
+        temp=y == cls
+        xi = np.matrix(data[temp.iloc[:,0]])  # get data foreach calss
         mio_i = np.matrix(np.mean(xi))  # mean per class
         xi = xi - mio_i # Xi - MeanXi
         p_i = xi.shape[0] / data.shape[0]   # PROBABILITY OF CLASS i

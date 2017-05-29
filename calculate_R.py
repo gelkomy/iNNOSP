@@ -48,7 +48,7 @@ def calculate_R(input_data):
         #eig_vecs = pd.DataFrame(eig_vecs)  # normalized eigenvectors
 
         abs_eig_vals = eig_vals.abs()  #Calculate abs(eig)
-        print abs_eig_vals
+        # print abs_eig_vals
 
         abs_eig_vals = 10 * np.log10(abs_eig_vals)  # 10*log10(abs)
 
