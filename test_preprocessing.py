@@ -4,7 +4,7 @@ from calculate_R import calculate_R
 
 
 import pickle
-x=pickle.load(open(r'E:\Faculty of Engineering\InnoTech\Epilipsy\Data\file1','rb'))
+x=pickle.load(open(r'E:\Faculty of Engineering\InnoTech\Epilipsy\Data\pkl patient 14\all_files.pkl','rb'))
 
 
 r = calculate_R(x)
