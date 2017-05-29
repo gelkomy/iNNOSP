@@ -58,7 +58,7 @@ def calculate_R(input_data):
 
             if max_diff < diff:
                 max_diff = diff
-                max_diff_index = i
+                max_diff_index = i + 1
 
         R = max_diff_index
 
