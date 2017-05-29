@@ -14,10 +14,9 @@ from feature_basis_selection import feature_basis_selection
 
 text_file=r'E:\Faculty of Engineering\InnoTech\Epilipsy\Data\Patient14\chb14-summary.txt'
 yTimeLine = getY(text_file,1 ,1 )
-#
+
 y = getWindows(yTimeLine)
-#
-#
+
 result=feature_basis_selection(x,y,r)
 
 
