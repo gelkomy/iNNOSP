@@ -29,28 +29,28 @@ def calculate_features(pxx):
         
         f = []
 
-        p1 = pxx[column][3:8].sum()
+        p1 = pxx[column][4:9].sum()
         f.append(p1)
 
-        p2 = pxx[column][7:13].sum()
+        p2 = pxx[column][8:14].sum()
         f.append(p2)
 
-        p3 = pxx[column][12:30].sum()
+        p3 = pxx[column][13:31].sum()
         f.append(p3)
 
-        p4 = pxx[column][29:50].sum()
+        p4 = pxx[column][30:51].sum()
         f.append(p4)
 
-        p5 = pxx[column][49:56].sum() + pxx[column][63:70].sum()
+        p5 = pxx[column][50:57].sum() + pxx[column][64:71].sum()
         f.append(p5)
 
-        p6 = pxx[column][69:90].sum()
+        p6 = pxx[column][70:91].sum()
         f.append(p6)
 
-        p7 = pxx[column][89:110].sum()
+        p7 = pxx[column][90:111].sum()
         f.append(p7)
 
-        p8 = pxx[column][109:116].sum() + pxx[column][123:128].sum()
+        p8 = pxx[column][110:117].sum() + pxx[column][124:129].sum()
         f.append(p8)
 
         f= [float(x) for x in f]
