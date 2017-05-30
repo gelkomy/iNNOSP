@@ -6,3 +6,5 @@
 *.pyc
 *.xml
 .idea/iNNOSP.iml
+*.xml
+*.pyc
