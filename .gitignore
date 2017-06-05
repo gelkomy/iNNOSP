@@ -11,6 +11,9 @@
 *.iml
 .idea/misc.xml
 *.xml
+<<<<<<< HEAD
+=======
 PrepareYVector.pyc
+>>>>>>> f06a2027a9fd1ad26cf7d00e14d1860c9afa767d
 *.pyc
 *.pyc

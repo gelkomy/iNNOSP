@@ -37,10 +37,11 @@ def feature_extraction(data):
     for window_start in window_list:
         window_end=window_start+datetime.timedelta(seconds=4)
         window_data=data.loc[window_start: window_end]
+        Fxx, Pxx = welch(x=window_data, fs=256, axis=0)
         window_data= window_data.ix[0:1024,:]
         #Fxx, Pxx = welch(x=window_data, fs=256, nperseg=256, noverlap=2,axis=0)
         #Fxx, Pxx = welch(x=window_data, fs=256, axis=0)
-        Fxx, Pxx = welch(x=window_data, window='hamming', fs=256, nperseg=128, nfft=256, noverlap=64, axis=0)
+        #Fxx, Pxx = welch(x=window_data, window='hamming', fs=256, nperseg=128, nfft=256, noverlap=64, axis=0)
         Pxx=pd.DataFrame(Pxx,columns=window_data.columns)
         temp=calculate_features(Pxx)
         if len(all_windows)==0:

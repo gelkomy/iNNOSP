@@ -30,6 +30,7 @@ def compute_j(data, y):
     try:
         a = np.linalg.det(scatter['s_w'] + scatter['s_b'])
         b = np.linalg.det(scatter['s_w'])
+        print a,b
         J = a/b
     except ZeroDivisionError:
         J = 0
