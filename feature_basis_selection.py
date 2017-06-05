@@ -35,7 +35,6 @@ def feature_basis_selection(data,y, R):
         #to perform greedy search
         for i in range(0,r):
             max_j=-99999 # for the greedy seach of maximum j
-            
             #selecting the next best feature f*
             for f in range(0, electrode_data.shape[1]):
                 if f not in selected_features:

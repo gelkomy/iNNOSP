@@ -12,7 +12,7 @@ from PrepareWindowsVector import getWindows
 from feature_basis_selection import feature_basis_selection
 
 text_file=r'C:\Users\Hassan\Documents\Innotech\Epilepsy Python\iNNOSP\data\patient14\chb14-summary.txt'
-yTimeLine = getY(text_file,1 ,42 )
+yTimeLine = getY(text_file, 1, 42)
 y = getWindows(yTimeLine)
 result=feature_basis_selection(x,y,r)
 
