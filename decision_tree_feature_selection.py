@@ -21,20 +21,21 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.feature_selection import SelectFromModel
 from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
 from sklearn.svm import SVC
 import pandas as pd
 
 X= data['FP2-F4']
 Y=y
-# from imblearn.over_sampling import SMOTE
-# resampler=     SMOTE()
-# X, Y= resampler.fit_sample(X, Y)
+from imblearn.over_sampling import SMOTE
+resampler=     SMOTE()
+X, Y= resampler.fit_sample(X, Y)
+X= pd.DataFrame(X)
+Y=pd.DataFrame(Y)
 
-
-X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.33, random_state=7)
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.33, random_state=700)
 # fit model on all training data
-model = XGBClassifier()
+model = ExtraTreesClassifier()
 model.fit(X_train, y_train)
 # make predictions for test data and evaluate
 y_pred = model.predict(X_test)
@@ -64,7 +65,7 @@ for thresh in thresholds:
     selection = SelectFromModel(model, threshold=thresh, prefit=True)
     select_X_train = selection.transform(X_train)
     # train model
-    selection_model = RandomForestClassifier()
+    selection_model = XGBClassifier()
     selection_model.fit(select_X_train, y_train)
     # eval model
     select_X_test = selection.transform(X_test)
