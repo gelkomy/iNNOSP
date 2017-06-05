@@ -8,3 +8,8 @@
 .idea/iNNOSP.iml
 *.xml
 *.pyc
+*.iml
+.idea/misc.xml
+*.xml
+PrepareYVector.pyc
+*.pyc
