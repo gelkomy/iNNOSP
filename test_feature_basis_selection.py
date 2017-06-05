@@ -19,8 +19,8 @@ from PrepareWindowsVector import getWindows
 #with open(r'E:\Faculty of Engineering\InnoTech\Python Release\data.pkl', 'rb') as input:
 #    data=pickle.load(input)
 #
-#with open(r'E:\Faculty of Engineering\InnoTech\Python Release\r.pkl', 'rb') as input:
-#    R=pickle.load(input)    
+
+#data = pickle.load( open( r'E:\Faculty of Engineering\InnoTech\Epilipsy\preprocessed.pkl', "rb" ) )
 #y=pd.read_csv(r'E:\Faculty of Engineering\InnoTech\Python Release\y.csv')
 #y=y.ix[0:3600,1]
 
@@ -35,10 +35,10 @@ R=calculate_R(data)
 #
 #
 ##text_file=r'C:\Users\Yousef Essam\Desktop\Task1-ReadY\Patient14\test.txt'
-#text_file=r'E:\Faculty of Engineering\InnoTech\Epilipsy\Data\Patient14\chb14-summary.txt'
-#yTimeLine = getY(text_file,6 ,7 )
+text_file=r'E:\Faculty of Engineering\InnoTech\Epilipsy\Data\Patient14\chb14-summary.txt'
+yTimeLine = getY(text_file,6 ,7 )
 #
-#y = getWindows(yTimeLine)
+y = getWindows(yTimeLine)
 #
 #
-#result=feature_basis_selection(data,y,R)
+result=feature_basis_selection(data,y,R)

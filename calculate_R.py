@@ -48,7 +48,7 @@ def calculate_R(input_data):
         #eig_vecs = pd.DataFrame(eig_vecs)  # normalized eigenvectors
 
         abs_eig_vals = eig_vals.abs()  #Calculate abs(eig)
-        print abs_eig_vals
+        # print abs_eig_vals
 
         abs_eig_vals = 10 * np.log10(abs_eig_vals)  # 10*log10(abs)
 
@@ -58,7 +58,7 @@ def calculate_R(input_data):
 
             if max_diff < diff:
                 max_diff = diff
-                max_diff_index = i
+                max_diff_index = i + 1
 
         R = max_diff_index
 

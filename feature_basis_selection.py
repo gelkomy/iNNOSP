@@ -38,17 +38,19 @@ def feature_basis_selection(data,y, R):
             
             #selecting the next best feature f*
             for f in range(0, electrode_data.shape[1]):
-                current_features= copy.copy(selected_features)
-                current_features.append(f)
-                current_subset=electrode_data[current_features]
-                
-                #compute j for the current subset
-                j=compute_j(current_subset,y)
-                
-                if j > max_j and j <>0:
-                    max_j=j
-                    selected_features.append(f)
-    #                print(selected_features)
+                if f not in selected_features:
+                    current_features= copy.copy(selected_features)
+                    current_features.append(f)
+                    current_subset=electrode_data[current_features]
+
+                    #compute j for the current subset
+                    j=compute_j(current_subset,y)
+                    print 'j of ', str(current_features), '= ', j
+                    if j > max_j and j != 0:
+                        max_j=j
+                        max_f=f
+            selected_features.append(max_f)
+            # print(selected_features)
         all_electrodes[electrode]=electrode_data[selected_features]
                     
     #    print "the selected features for the electrode " , electrode, " is ", selected_features
