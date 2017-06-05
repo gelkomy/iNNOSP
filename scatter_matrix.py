@@ -35,6 +35,7 @@ def scatter_matrix(data, y):
     s_b = np.matrix(np.zeros([size, size])) #initializing s_b
     s_w = np.matrix(np.zeros([size, size]))
     overall_mean = np.matrix(np.mean(data))
+    data.reset_index(drop=True, inplace=True)
     for cls in classes:
         class_idx = y.loc[y['Y'] == cls]
         xi = data.iloc[class_idx.index.values]   # get data foreach calss
