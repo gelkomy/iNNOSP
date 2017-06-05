@@ -5,11 +5,15 @@
 *.asv
 *.pyc
 *.xml
+.idea/iNNOSP.iml
+*.xml
+*.pyc
+*.iml
+.idea/misc.xml
+*.xml
 <<<<<<< HEAD
 =======
-.idea/iNNOSP.iml
->>>>>>> ca80f8ff12ffa905c377546d5f5300fb5260bc7d
-*.xml
-*.xml
+PrepareYVector.pyc
+>>>>>>> f06a2027a9fd1ad26cf7d00e14d1860c9afa767d
 *.pyc
 *.pyc
