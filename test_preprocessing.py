@@ -14,7 +14,7 @@ from feature_basis_selection import feature_basis_selection
 from electrode_selection import electrode_selction
 
 text_file=r'D:\College\Inno\InnoBCI\data\Patient14\chb14-summary.txt'
-yTimeLine = getY(text_file,1 ,100 )
+yTimeLine = getY(text_file,1 ,42 )
 #
 y = getWindows(yTimeLine)
 #
