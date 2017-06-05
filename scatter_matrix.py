@@ -38,11 +38,11 @@ def scatter_matrix(data, y):
     data.reset_index(drop=True, inplace=True)
     for cls in classes:
         class_idx = y.loc[y['Y'] == cls]
-        xi = data.iloc[class_idx.index.values]   # get data foreach calss
-        mio_i = np.matrix(np.mean(xi))  # mean per class
+        xi = np.matrix(data.iloc[class_idx.index.values])   # get data foreach calss
+        mio_i = np.matrix(np.mean(xi, axis=0))  # mean per class
         xi = xi - mio_i # Xi - MeanXi
         p_i = float(xi.shape[0]) / data.shape[0]   # PROBABILITY OF CLASS i
-        s_w = s_w + p_i * np.matmul(xi.T * xi)    # CALCULATE S_w
-        s_b = s_b + p_i * (mio_i - overall_mean).T*(mio_i-overall_mean)    # CALCULATE S_b
+        s_w = s_w + p_i * np.matmul(xi, xi.T)   # CALCULATE S_w
+        s_b = s_b + p_i * np.matmul ((mio_i - overall_mean),(mio_i-overall_mean).T )   # CALCULATE S_b
     scatter = {'s_w': s_w, 's_b': s_b}
     return scatter
