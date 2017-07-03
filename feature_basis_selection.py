@@ -44,7 +44,7 @@ def feature_basis_selection(data,y, R):
 
                     #compute j for the current subset
                     j=compute_j(current_subset,y)
-                    print 'j of ', str(current_features), '= ', j
+                    #print 'j of ', str(current_features), '= ', j
                     if j > max_j and j != 0:
                         max_j=j
                         max_f=f

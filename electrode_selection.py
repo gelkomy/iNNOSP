@@ -48,7 +48,7 @@ def electrode_selction(features, y):
             j_pairs[i, j] = compute_j(elec_pair, y)
     selected_electrodes = None
     if max(j_singles.values()) < np.max(np.max(j_pairs)):
-        idx = np.max(j_pairs)
+        idx = np.where(j_pairs == np.max(j_pairs))
         selected_electrodes = [elec_key[idx[0][0]], elec_key[idx[1][0]]]
     else:
         idx = max(j_singles)
